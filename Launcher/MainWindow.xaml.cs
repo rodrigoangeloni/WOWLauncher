@@ -247,21 +247,8 @@ namespace Launcher
                     break;
             }
 
-            string[] supportedLanguages = { "enUS", "koKR", "frFR", "deDE", "zhCN", "zhTW", "esES", "esMX", "ruRU" };
-            string gameLanguage = "enUS";
-
             string dataPath = Path.Combine(gPath, "Data");
 
-            foreach (string lang in supportedLanguages)
-            {
-                if (Directory.Exists(Path.Combine(dataPath, lang)))
-                {
-                    gameLanguage = lang;
-                    break;
-                }
-            }
-
-            var rPath = Path.Combine(gPath, $@"Data\{gameLanguage}\realmlist.wtf");
             var cPath = Path.Combine(gPath, "Cache");
 
             _gPath = gPath;
@@ -282,43 +269,52 @@ namespace Launcher
                 var sr = new StreamReader(response.GetResponseStream() ?? throw new InvalidOperationException($@"Ошибка получения ответа от {Properties.Settings.Default.RealmlistURL}"));
                 var realmlist = sr.ReadToEnd();
 
-                var attributes = File.GetAttributes(rPath);
-                if ((attributes & FileAttributes.ReadOnly) == FileAttributes.ReadOnly)
-		        {
-		            attributes = Utilities.File.RemoveAttribute(attributes, FileAttributes.ReadOnly);
-		            File.SetAttributes(rPath, attributes);
-		        } 
+                string[] supportedLanguages = { "enUS", "koKR", "frFR", "deDE", "zhCN", "zhTW", "esES", "esMX", "ruRU" };
 
-                //TODO: COMMENT NEXT PART OF CODE IF CLIENT DOESN'T HAVE REALMLIST
-                #region <= 3.3.5 realmlist changer
-                using (var writer = new StreamWriter(rPath))
+                foreach (string lang in supportedLanguages)
                 {
-                    writer.WriteLine(realmlist);
+                    if (Directory.Exists(Path.Combine(dataPath, lang)))
+                    {
+                        var rPath = Path.Combine(gPath, $@"Data\{lang}\realmlist.wtf");
+                        var attributes = File.GetAttributes(rPath);
+                        if ((attributes & FileAttributes.ReadOnly) == FileAttributes.ReadOnly)
+                        {
+                            attributes = Utilities.File.RemoveAttribute(attributes, FileAttributes.ReadOnly);
+                            File.SetAttributes(rPath, attributes);
+                        }
+
+                        //TODO: COMMENT NEXT PART OF CODE IF CLIENT DOESN'T HAVE REALMLIST
+                        #region <= 3.3.5 realmlist changer
+                        using (var writer = new StreamWriter(rPath))
+                        {
+                            writer.WriteLine(realmlist);
+                        }
+                        #endregion
+
+                        //TODO: UNCOMMENT NEXT PART OF CODE IF CLIENT DOESN'T HAVE REALMLIST
+                        #region >= 3.3.5 realmlist changer
+                        /*
+
+                        var builder = new StringBuilder();
+
+                        using (var reader = new StreamReader(rPath))
+                        {
+                            string line;
+                            while ((line = reader.ReadLine()) != null)
+                                builder.AppendLine(line.ToLower().Contains("set realmlist") ? realmlist : line);
+                        }
+
+                        using (var writer = new StreamWriter(rPath))
+                        {
+                            writer.Write(builder.ToString());
+                        } 
+
+                        */
+                        #endregion
+
+                        DeleteOldPatches();
+                    }
                 }
-                #endregion
-
-                //TODO: UNCOMMENT NEXT PART OF CODE IF CLIENT DOESN'T HAVE REALMLIST
-                #region >= 3.3.5 realmlist changer
-                /*
-
-                var builder = new StringBuilder();
-
-                using (var reader = new StreamReader(rPath))
-                {
-                    string line;
-                    while ((line = reader.ReadLine()) != null)
-                        builder.AppendLine(line.ToLower().Contains("set realmlist") ? realmlist : line);
-                }
-
-                using (var writer = new StreamWriter(rPath))
-                {
-                    writer.Write(builder.ToString());
-                } 
-
-                */
-                #endregion
-
-                DeleteOldPatches();
             }
             catch (Exception ex)
             {
