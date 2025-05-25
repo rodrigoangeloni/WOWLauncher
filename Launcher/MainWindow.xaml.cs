@@ -247,8 +247,23 @@ namespace Launcher
                     break;
             }
 
-            var rPath = Path.Combine(gPath, @"Data\ruRU\realmlist.wtf");
-            var cPath = Path.Combine(gPath,  "Cache");
+            string[] supportedLanguages = { "enUS", "koKR", "frFR", "deDE", "zhCN", "zhTW", "esES", "esMX", "ruRU" };
+            string gameLanguage = "enUS";
+
+            string dataPath = Path.Combine(gPath, "Data");
+
+            foreach (string lang in supportedLanguages)
+            {
+                if (Directory.Exists(Path.Combine(dataPath, lang)))
+                {
+                    gameLanguage = lang;
+                    break;
+                }
+            }
+
+            var rPath = Path.Combine(gPath, $@"Data\{gameLanguage}\realmlist.wtf");
+            var cPath = Path.Combine(gPath, "Cache");
+
             _gPath = gPath;
 
             try

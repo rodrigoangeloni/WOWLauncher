@@ -18,12 +18,17 @@ namespace Launcher.HelpClasses
         {
             public static string GetPath(string gamePath, string item)
             {
-                if (item.ToLower().Contains(".mpq") && item.Contains("-ruRU-"))
-                    return Path.Combine(gamePath, $@"Data\ruRU\{item}"); 
+                string[] supportedLanguages = { "enUS", "koKR", "frFR", "deDE", "zhCN", "zhTW", "esES", "esMX", "ruRU" };
 
-                return item.ToLower().Contains(".mpq") 
-                    ? Path.Combine(gamePath, $@"Data\{item}") 
-                    : Path.Combine(gamePath, item);
+                foreach (string lang in supportedLanguages)
+                {
+                    if (item.ToLower().Contains(".mpq") && item.Contains($"-{lang}-"))
+                    {
+                        return Path.Combine(gamePath, $@"Data\{lang}\{item}");
+                    }
+                }
+
+                return item.ToLower().Contains(".mpq") ? Path.Combine(gamePath, $@"Data\{item}") : Path.Combine(gamePath, item);
             }
 
             public static string DetectSize(long value)
