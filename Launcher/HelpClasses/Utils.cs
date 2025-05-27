@@ -1,16 +1,85 @@
-﻿using System.IO;
+﻿using Launcher.Controls.Update;
+using System.IO;
 using System.Net;
-using Launcher.Controls.Update;
+using System.Text;
 
 namespace Launcher.HelpClasses
 {
     internal class Utilities
     {
-        public class File
+
+
+        public static readonly string[] LANGS = { "enUS", "esMX", "ptBR", "deDE", "enGB", "esES", "frFR", "itIT", "ruRU", "koKR", "zhTW", "zhCN" };
+
+
+        public class ReamlistUtils
         {
-            public static FileAttributes RemoveAttribute(FileAttributes attributes, FileAttributes attributesToRemove)
+            private static void ClearReadOnlyAttributes(string filePath)
             {
-                return attributes & ~attributesToRemove;
+                var attributes = File.GetAttributes(filePath);
+                if ((attributes & FileAttributes.ReadOnly) == FileAttributes.ReadOnly)
+                {
+                    attributes = attributes & ~FileAttributes.ReadOnly;
+                    File.SetAttributes(filePath, attributes);
+                }
+            }
+
+            private static void WriteRealmlistContent(string realmlistPath, string realmlistContent)
+            {
+                if (!File.Exists(realmlistPath))
+                {
+                    return;
+                }
+
+                ClearReadOnlyAttributes(realmlistPath);
+
+                using (var writer = new StreamWriter(realmlistPath))
+                {
+                    writer.WriteLine(realmlistContent);
+                }
+            }
+
+            public static void WriteVanillaRealmlist(string gamePath, string realmlistContent)
+            {
+                var realmlistPath = Path.Combine(gamePath, "realmlist.wtf");
+                WriteRealmlistContent(realmlistPath, realmlistContent);
+            }
+
+            public static void WriteLocalizedRealmlist(string gamePath, string realmlistContent)
+            {
+                // thanks to https://github.com/pangolp for idea and basic implementation multilang universal realmlist handling
+                foreach (var lang in LANGS)
+                {
+                    var realmlistPath = Path.Combine(gamePath, $@"Data\{lang}\realmlist.wtf");
+                    WriteRealmlistContent(realmlistPath, realmlistContent);
+                }
+            }
+
+            public static void WritePandariaRealmlist(string gamePath, string realmlistContent)
+            {
+                var realmlistPath = Path.Combine(gamePath, @"WTF\config.wtf");
+                if (!File.Exists(realmlistPath))
+                {
+                    return;
+                }
+
+                ClearReadOnlyAttributes(realmlistPath);
+
+                var builder = new StringBuilder();
+                using (var reader = new StreamReader(realmlistPath))
+                {
+                    string line;
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        builder.AppendLine(line.ToLower().Contains("set realmlist") ? realmlistContent : line);
+                    }
+                        
+                }
+
+                using (var writer = new StreamWriter(realmlistPath))
+                {
+                    writer.Write(builder.ToString());
+                }
             }
         }
 
@@ -18,11 +87,17 @@ namespace Launcher.HelpClasses
         {
             public static string GetPath(string gamePath, string item)
             {
-                if (item.ToLower().Contains(".mpq") && item.Contains("-ruRU-"))
-                    return Path.Combine(gamePath, $@"Data\ruRU\{item}"); 
+                // thanks to https://github.com/pangolp for idea and basic implementation multilang universal patch handling
+                foreach (var lang in LANGS)
+                {
+                    if (item.ToLower().EndsWith(".mpq") && item.Contains($@"-{lang}-"))
+                    {
+                        return Path.Combine(gamePath, $@"Data\{lang}\{item}");
+                    }
+                }
 
-                return item.ToLower().Contains(".mpq") 
-                    ? Path.Combine(gamePath, $@"Data\{item}") 
+                return item.ToLower().EndsWith(".mpq")
+                    ? Path.Combine(gamePath, $@"Data\{item}")
                     : Path.Combine(gamePath, item);
             }
 

@@ -247,8 +247,7 @@ namespace Launcher
                     break;
             }
 
-            var rPath = Path.Combine(gPath, @"Data\ruRU\realmlist.wtf");
-            var cPath = Path.Combine(gPath,  "Cache");
+            var cPath = Path.Combine(gPath, "Cache");
             _gPath = gPath;
 
             try
@@ -267,38 +266,26 @@ namespace Launcher
                 var sr = new StreamReader(response.GetResponseStream() ?? throw new InvalidOperationException($@"Ошибка получения ответа от {Properties.Settings.Default.RealmlistURL}"));
                 var realmlist = sr.ReadToEnd();
 
-                var attributes = File.GetAttributes(rPath);
-                if ((attributes & FileAttributes.ReadOnly) == FileAttributes.ReadOnly)
-		        {
-		            attributes = Utilities.File.RemoveAttribute(attributes, FileAttributes.ReadOnly);
-		            File.SetAttributes(rPath, attributes);
-		        } 
+                #region vanilla realmlist changer
+                /*
+
+                Utilities.ReamlistUtils.WriteVanillaRealmlist(gPath, realmlist);
+
+                */
+                #endregion
 
                 //TODO: COMMENT NEXT PART OF CODE IF CLIENT DOESN'T HAVE REALMLIST
-                #region <= 3.3.5 realmlist changer
-                using (var writer = new StreamWriter(rPath))
-                {
-                    writer.WriteLine(realmlist);
-                }
+                #region lich king realmlist changer
+
+                Utilities.ReamlistUtils.WriteLocalizedRealmlist(gPath, realmlist);
+
                 #endregion
 
                 //TODO: UNCOMMENT NEXT PART OF CODE IF CLIENT DOESN'T HAVE REALMLIST
-                #region >= 3.3.5 realmlist changer
+                #region pandaria realmlist changer
                 /*
 
-                var builder = new StringBuilder();
-
-                using (var reader = new StreamReader(rPath))
-                {
-                    string line;
-                    while ((line = reader.ReadLine()) != null)
-                        builder.AppendLine(line.ToLower().Contains("set realmlist") ? realmlist : line);
-                }
-
-                using (var writer = new StreamWriter(rPath))
-                {
-                    writer.Write(builder.ToString());
-                } 
+                Utilities.ReamlistUtils.WritePandariaRealmlist(gPath, realmlist);
 
                 */
                 #endregion
