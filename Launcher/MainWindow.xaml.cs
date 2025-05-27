@@ -1,4 +1,4 @@
-﻿// Данный програмный продукт является результатом труда и стараний Jumper'а
+// Данный програмный продукт является результатом труда и стараний Jumper'а
 // Все права и копирайты закреплены за ним
 // (c) 2011-2019 год
 //--------------------------------------------------------------------
@@ -247,10 +247,7 @@ namespace Launcher
                     break;
             }
 
-            string dataPath = Path.Combine(gPath, "Data");
-
             var cPath = Path.Combine(gPath, "Cache");
-
             _gPath = gPath;
 
             try
@@ -269,52 +266,31 @@ namespace Launcher
                 var sr = new StreamReader(response.GetResponseStream() ?? throw new InvalidOperationException($@"Ошибка получения ответа от {Properties.Settings.Default.RealmlistURL}"));
                 var realmlist = sr.ReadToEnd();
 
-                string[] supportedLanguages = { "enUS", "koKR", "frFR", "deDE", "zhCN", "zhTW", "esES", "esMX", "ruRU" };
+                #region vanilla realmlist changer
+                /*
 
-                foreach (string lang in supportedLanguages)
-                {
-                    if (Directory.Exists(Path.Combine(dataPath, lang)))
-                    {
-                        var rPath = Path.Combine(gPath, $@"Data\{lang}\realmlist.wtf");
-                        var attributes = File.GetAttributes(rPath);
-                        if ((attributes & FileAttributes.ReadOnly) == FileAttributes.ReadOnly)
-                        {
-                            attributes = Utilities.File.RemoveAttribute(attributes, FileAttributes.ReadOnly);
-                            File.SetAttributes(rPath, attributes);
-                        }
+                Utilities.ReamlistUtils.WriteVanillaRealmlist(gPath, realmlist);
 
-                        //TODO: COMMENT NEXT PART OF CODE IF CLIENT DOESN'T HAVE REALMLIST
-                        #region <= 3.3.5 realmlist changer
-                        using (var writer = new StreamWriter(rPath))
-                        {
-                            writer.WriteLine(realmlist);
-                        }
-                        #endregion
+                */
+                #endregion
 
-                        //TODO: UNCOMMENT NEXT PART OF CODE IF CLIENT DOESN'T HAVE REALMLIST
-                        #region >= 3.3.5 realmlist changer
-                        /*
+                //TODO: COMMENT NEXT PART OF CODE IF CLIENT DOESN'T HAVE REALMLIST
+                #region lich king realmlist changer
 
-                        var builder = new StringBuilder();
+                Utilities.ReamlistUtils.WriteLocalizedRealmlist(gPath, realmlist);
 
-                        using (var reader = new StreamReader(rPath))
-                        {
-                            string line;
-                            while ((line = reader.ReadLine()) != null)
-                                builder.AppendLine(line.ToLower().Contains("set realmlist") ? realmlist : line);
-                        }
+                #endregion
 
-                        using (var writer = new StreamWriter(rPath))
-                        {
-                            writer.Write(builder.ToString());
-                        } 
+                //TODO: UNCOMMENT NEXT PART OF CODE IF CLIENT DOESN'T HAVE REALMLIST
+                #region pandaria realmlist changer
+                /*
 
-                        */
-                        #endregion
+                Utilities.ReamlistUtils.WritePandariaRealmlist(gPath, realmlist);
 
-                        DeleteOldPatches();
-                    }
-                }
+                */
+                #endregion
+
+                DeleteOldPatches();
             }
             catch (Exception ex)
             {
