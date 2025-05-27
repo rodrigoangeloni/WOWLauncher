@@ -1,4 +1,4 @@
-﻿using Launcher.Controls.Update;
+using Launcher.Controls.Update;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -8,9 +8,7 @@ namespace Launcher.HelpClasses
     internal class Utilities
     {
 
-
         public static readonly string[] LANGS = { "enUS", "esMX", "ptBR", "deDE", "enGB", "esES", "frFR", "itIT", "ruRU", "koKR", "zhTW", "zhCN" };
-
 
         public class ReamlistUtils
         {
