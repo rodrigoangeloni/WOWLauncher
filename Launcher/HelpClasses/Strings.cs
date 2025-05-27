@@ -8,9 +8,9 @@
 
             public static readonly string PATH_CHOOSE = "Выберите папку с клиентом игры";
 
-            public static readonly string INIT = "Инициализация...";
+            public static readonly string INIT = "Инициализация…";
 
-            public static readonly string UPDATE_IN_PROGRESS = "Идет обновление...";
+            public static readonly string UPDATE_IN_PROGRESS = "Идет обновление…";
             public static readonly string UPDATE_DONE = "Игра обновлена";
         }
 
