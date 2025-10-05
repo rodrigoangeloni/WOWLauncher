@@ -67,8 +67,8 @@
                         </Rectangle.Fill>
                     </Rectangle>
                     <Label Content="Al dejar el servidor" HorizontalAlignment="Stretch" Margin="2,0,0,0" Foreground="White" FontWeight="Bold" FontSize="15" Height="32" VerticalAlignment="Top" />
-                    <Label HorizontalAlignment="Left" Height="105" Margin="10,37,10,0" VerticalAlignment="Top" MaxWidth="260" Foreground="White">
-                        <TextBlock><Run FontWeight="Light" Text="Si desea dejar el servidor," /><LineBreak/><Run FontWeight="Light" Text="simplemente puede presionar este botón," /><LineBreak/><Run FontWeight="Light" Text="que permitirá eliminar todos los archivos descargados" /><LineBreak/><Run FontWeight="Light" Text="sin dañar el cliente del juego." /></TextBlock>
+                    <Label HorizontalAlignment="Left" Height="105" Margin="10,37,10,0" VerticalAlignment="Top" MaxWidth="310" Foreground="White">
+                        <TextBlock TextWrapping="Wrap"><Run FontWeight="Light" Text="Si desea dejar el servidor, simplemente puede presionar este botón, que permitirá eliminar todos los archivos descargados sin dañar el cliente del juego." /></TextBlock>
                     </Label>
                     <Button x:Name="BtnDel"  Cursor="{Binding Cursor, ElementName=version}" Visibility="Visible"  Content="Eliminar archivos del servidor" HorizontalAlignment="Right" Margin="0,0,10,10" MinWidth="220" Style="{DynamicResource PlayButton}" FontSize="16" IsTabStop="False" BorderThickness="1" FontFamily="Verdana" Height="45" VerticalAlignment="Bottom" ToolTipService.ShowOnDisabled="True" Click="ButtonDelete_Click"/>
 
