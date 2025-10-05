@@ -98,5 +98,13 @@ namespace Launcher
             var regex = new Regex("[^0-9]+");
             return !regex.IsMatch(text);
         }
+
+        private void TitleBar_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (e.ClickCount == 1)
+            {
+                DragMove();
+            }
+        }
     }
 }
