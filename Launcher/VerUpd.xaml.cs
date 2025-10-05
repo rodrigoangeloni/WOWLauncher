@@ -9,7 +9,7 @@ using System.Windows.Input;
 namespace Launcher
 {
     /// <summary>
-    /// Логика взаимодействия для VerUpd.xaml
+    /// Lógica de interacción para VerUpd.xaml
     /// </summary>
     public partial class VerUpd
     {
@@ -19,7 +19,7 @@ namespace Launcher
 
             var request = (HttpWebRequest)WebRequest.Create(new Uri(Properties.Settings.Default.LauncherUpdates));
             var response = (HttpWebResponse)request.GetResponse();
-            var sr = new StreamReader(response.GetResponseStream() ?? throw new InvalidOperationException($@"Ошибка получения ответа от {Properties.Settings.Default.LauncherUpdates}"));
+            var sr = new StreamReader(response.GetResponseStream() ?? throw new InvalidOperationException($@"Error al obtener respuesta de {Properties.Settings.Default.LauncherUpdates}"));
             NewsBox.AppendText(sr.ReadToEnd());
         }
 

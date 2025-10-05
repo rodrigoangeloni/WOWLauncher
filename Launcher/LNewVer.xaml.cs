@@ -6,7 +6,7 @@ using System.Diagnostics;
 namespace Launcher
 {
     /// <summary>
-    /// Логика взаимодействия для LNewVer.xaml
+    /// Lógica de interacción para LNewVer.xaml
     /// </summary>
     public partial class LNewVer
     {

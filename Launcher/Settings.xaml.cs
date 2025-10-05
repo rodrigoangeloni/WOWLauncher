@@ -7,7 +7,7 @@ using Launcher.HelpClasses;
 namespace Launcher
 {
     /// <summary>
-    /// Логика взаимодействия для Settings.xaml
+    /// Lógica de interacción para Settings.xaml
     /// </summary>
     public partial class Settings
     {
@@ -58,7 +58,7 @@ namespace Launcher
         {
             var folder = new System.Windows.Forms.FolderBrowserDialog
             {
-                Description = @"Выберите папку с клиентом игры",
+                Description = @"Seleccione la carpeta con el cliente del juego",
                 RootFolder = Environment.SpecialFolder.MyComputer,
                 ShowNewFolderButton = false
             };
@@ -71,17 +71,17 @@ namespace Launcher
                 Folder.Text = folderPath;
             }
             else
-            { MessageBox.Show("Файл \"Wow.exe\" не найден!\nПожалуйста выберите корректную папку с игрой!", "Ошибка выбора папки", MessageBoxButton.OK, MessageBoxImage.Error); }
+            { MessageBox.Show("¡No se encontró el archivo \"Wow.exe\"!\n¡Por favor seleccione la carpeta correcta del juego!", "Error de selección de carpeta", MessageBoxButton.OK, MessageBoxImage.Error); }
         }
 
         private void ResetPath_Click(object sender, RoutedEventArgs e)
         {
-            Folder.Text = "Не задано";
+            Folder.Text = "No configurado";
         }
 
         private void ButtonDelete_Click(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("Вы действительно хотите удалить все загруженные файлы сервера?", "Подтверждение удаления", MessageBoxButton.YesNoCancel, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            if (MessageBox.Show("¿Realmente desea eliminar todos los archivos descargados del servidor?", "Confirmación de eliminación", MessageBoxButton.YesNoCancel, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
                 if (Owner is MainWindow m) m.DPatches();
             }

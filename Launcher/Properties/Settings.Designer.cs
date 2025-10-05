@@ -115,7 +115,7 @@ namespace Launcher.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Не задано")]
+        [global::System.Configuration.DefaultSettingValueAttribute("No configurado")]
         public string GameFolder {
             get {
                 return ((string)(this["GameFolder"]));

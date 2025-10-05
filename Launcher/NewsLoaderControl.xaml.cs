@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 namespace Launcher
 {
     /// <summary>
-    /// Логика взаимодействия для NewsLoaderControl.xaml
+    /// Lógica de interacción para NewsLoaderControl.xaml
     /// </summary>
     public partial class NewsLoaderControl
     {
