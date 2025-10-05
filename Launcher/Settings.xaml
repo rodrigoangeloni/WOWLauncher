@@ -17,9 +17,9 @@
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
-        <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,55,10,67" Background="#FF191919" BorderBrush="#FF191919" VerticalScrollBarVisibility="Auto">
-            <StackPanel Margin="10" HorizontalAlignment="Stretch">
-                <Grid Height="111" Margin="0,0,0,10" HorizontalAlignment="Stretch" MaxWidth="800">
+        <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,55,10,67" Background="#FF191919" BorderBrush="#FF191919" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <StackPanel Margin="10">
+                <Grid Height="111" Margin="0,0,0,10" MinWidth="520">
 
                     <Rectangle Stroke="Black" RadiusY="3" RadiusX="3">
                         <Rectangle.Fill>
@@ -30,14 +30,14 @@
                             </LinearGradientBrush>
                         </Rectangle.Fill>
                     </Rectangle>
-                    <Label Content="Configuración del cliente del juego" HorizontalAlignment="Left" Width="386" Foreground="White" FontWeight="Bold" FontSize="15" Height="32" VerticalAlignment="Top" />
+                    <Label Content="Configuración del cliente del juego" HorizontalAlignment="Stretch" Foreground="White" FontWeight="Bold" FontSize="15" Height="32" VerticalAlignment="Top" />
                     <Label Content="Ruta" HorizontalAlignment="Left" Margin="10,37,0,0" VerticalAlignment="Top" Width="49" Foreground="{Binding Foreground, ElementName=Window}" FontSize="15"/>
-                    <TextBox x:Name="Folder" Height="30" Margin="64,37,52,0" VerticalAlignment="Top" Background="#19000000" BorderBrush="#B2171717" SelectionBrush="#FF5F5F5F" Foreground="#FFE2E2E2" FontSize="15" VerticalContentAlignment="Center" AllowDrop="True" IsTabStop="False" BorderThickness="0" IsReadOnly="True"/>
-                    <Button Content=". . ." HorizontalAlignment="Left" Margin="433,37,0,0" VerticalAlignment="Top" Width="37" Height="30" Style="{DynamicResource PlayButton}" Click="Button_Click_1" IsTabStop="False"/>
-                    <Button Content="Restablecer" x:Name="ResetPath" HorizontalAlignment="Left" Margin="395,72,0,0" VerticalAlignment="Top" Width="75" Height="30" Style="{DynamicResource PlayButton}" IsTabStop="False" Click="ResetPath_Click" ToolTipService.ShowOnDisabled="True"/>
+                    <TextBox x:Name="Folder" Height="30" Margin="64,37,100,0" VerticalAlignment="Top" Background="#19000000" BorderBrush="#B2171717" SelectionBrush="#FF5F5F5F" Foreground="#FFE2E2E2" FontSize="15" VerticalContentAlignment="Center" AllowDrop="True" IsTabStop="False" BorderThickness="0" IsReadOnly="True"/>
+                    <Button Content=". . ." HorizontalAlignment="Right" Margin="0,37,52,0" VerticalAlignment="Top" Width="37" Height="30" Style="{DynamicResource PlayButton}" Click="Button_Click_1" IsTabStop="False"/>
+                    <Button Content="Restablecer" x:Name="ResetPath" HorizontalAlignment="Right" Margin="0,72,10,0" VerticalAlignment="Top" Width="90" Height="30" Style="{DynamicResource PlayButton}" IsTabStop="False" Click="ResetPath_Click" ToolTipService.ShowOnDisabled="True"/>
 
                 </Grid>
-                <Grid Height="186" Margin="0,0,0,10" HorizontalAlignment="Stretch" MaxWidth="800">
+                <Grid Height="186" Margin="0,0,0,10" MinWidth="520">
 
                     <Rectangle Stroke="Black" RadiusY="3" RadiusX="3">
                         <Rectangle.Fill>
@@ -48,15 +48,15 @@
                             </LinearGradientBrush>
                         </Rectangle.Fill>
                     </Rectangle>
-                    <Label Content="Configuración de inicio de sesión" HorizontalAlignment="Left" Width="386" Foreground="White" FontWeight="Bold" FontSize="15" Height="32" VerticalAlignment="Top" />
-                    <CheckBox x:Name="Autologin" Content="Autorización automática en el cliente" HorizontalAlignment="Left" Margin="10,63,0,0" VerticalAlignment="Top" Foreground="White" FontSize="15" Height="17" Width="307" IsTabStop="False"/>
+                    <Label Content="Configuración de inicio de sesión" HorizontalAlignment="Stretch" Foreground="White" FontWeight="Bold" FontSize="15" Height="32" VerticalAlignment="Top" />
+                    <CheckBox x:Name="Autologin" Content="Autorización automática en el cliente" HorizontalAlignment="Stretch" Margin="10,63,10,0" VerticalAlignment="Top" Foreground="White" FontSize="15" Height="17" IsTabStop="False"/>
                     <Label Content="Nombre de usuario" HorizontalAlignment="Left" Margin="10,101,0,0" VerticalAlignment="Top" Width="165" Foreground="{Binding Foreground, ElementName=Window}" FontSize="15"/>
                     <TextBox x:Name="Login" Height="30" Margin="180,101,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="#19000000" BorderBrush="#B2171717" SelectionBrush="#FF5F5F5F" Foreground="#FFE2E2E2" FontSize="15" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" IsTabStop="False" BorderThickness="0"/>
                     <Label Content="Contraseña" HorizontalAlignment="Left" Margin="10,145,0,0" VerticalAlignment="Top" Width="165" Foreground="{Binding Foreground, ElementName=Window}" FontSize="15"/>
                     <PasswordBox x:Name="Password" Height="30" Margin="180,145,10,0" VerticalAlignment="Top" Background="#19000000" BorderBrush="#B2171717" SelectionBrush="#FF5F5F5F" Foreground="#FFE2E2E2" FontSize="15" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" IsTabStop="False" BorderThickness="0"/>
 
                 </Grid>
-                <Grid Height="165" Margin="0,0,0,10" HorizontalAlignment="Stretch" MaxWidth="800">
+                <Grid Height="165" Margin="0,0,0,10" MinWidth="520">
                     <Rectangle Stroke="Black" RadiusY="3" RadiusX="3">
                         <Rectangle.Fill>
                             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -66,14 +66,14 @@
                             </LinearGradientBrush>
                         </Rectangle.Fill>
                     </Rectangle>
-                    <Label Content="Al dejar el servidor" HorizontalAlignment="Left" Margin="2,0,0,0" Width="386" Foreground="White" FontWeight="Bold" FontSize="15" Height="32" VerticalAlignment="Top" />
-                    <Button x:Name="BtnDel"  Cursor="{Binding Cursor, ElementName=version}" Visibility="Visible"  Content="Eliminar archivos del servidor" HorizontalAlignment="Left" Margin="252,0,0,10" Width="218" Style="{DynamicResource PlayButton}" FontSize="16" IsTabStop="False" BorderThickness="1" FontFamily="Verdana" Height="45" VerticalAlignment="Bottom" ToolTipService.ShowOnDisabled="True" Click="ButtonDelete_Click"/>
-                    <Label HorizontalAlignment="Left" Height="105" Margin="10,37,0,0" VerticalAlignment="Top" Width="240" Foreground="White">
+                    <Label Content="Al dejar el servidor" HorizontalAlignment="Stretch" Margin="2,0,0,0" Foreground="White" FontWeight="Bold" FontSize="15" Height="32" VerticalAlignment="Top" />
+                    <Button x:Name="BtnDel"  Cursor="{Binding Cursor, ElementName=version}" Visibility="Visible"  Content="Eliminar archivos del servidor" HorizontalAlignment="Right" Margin="0,0,10,10" MinWidth="220" Style="{DynamicResource PlayButton}" FontSize="16" IsTabStop="False" BorderThickness="1" FontFamily="Verdana" Height="45" VerticalAlignment="Bottom" ToolTipService.ShowOnDisabled="True" Click="ButtonDelete_Click"/>
+                    <Label HorizontalAlignment="Left" Height="105" Margin="10,37,250,0" VerticalAlignment="Top" Foreground="White">
                         <TextBlock><Run FontWeight="Light" Text="Si desea dejar el servidor," /><LineBreak/><Run FontWeight="Light" Text="simplemente puede presionar este botón," /><LineBreak/><Run FontWeight="Light" Text="que permitirá eliminar todos los archivos descargados" /><LineBreak/><Run FontWeight="Light" Text="sin dañar el cliente del juego." /></TextBlock>
                     </Label>
 
                 </Grid>
-                <Grid Height="147" HorizontalAlignment="Stretch" MaxWidth="800">
+                <Grid Height="147" MinWidth="520">
                 	<Rectangle Stroke="Black" RadiusY="3" RadiusX="3">
                 		<Rectangle.Fill>
                 			<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -83,22 +83,22 @@
                 			</LinearGradientBrush>
                 		</Rectangle.Fill>
                 	</Rectangle>
-                	<Label Content="Configuración de descarga" HorizontalAlignment="Left" Margin="2,0,0,0" Width="386" Foreground="White" FontWeight="Bold" FontSize="15" Height="32" VerticalAlignment="Top" />
-                	<Label  HorizontalAlignment="Left" Height="35" Margin="10,38,0,0" VerticalAlignment="Top" Width="301" Foreground="{Binding Foreground, ElementName=Window}" Content="Seleccione la variante de visualización de descarga:" FontSize="15"/>
-                	<ComboBox x:Name="ProgressType" HorizontalAlignment="Left" Margin="311,44,0,0" VerticalAlignment="Top" Width="148" IsTabStop="False" Height="29" VerticalContentAlignment="Center">
+                	<Label Content="Configuración de descarga" HorizontalAlignment="Stretch" Margin="2,0,0,0" Foreground="White" FontWeight="Bold" FontSize="15" Height="32" VerticalAlignment="Top" />
+                	<Label  HorizontalAlignment="Left" Height="35" Margin="10,38,170,0" VerticalAlignment="Top" Foreground="{Binding Foreground, ElementName=Window}" Content="Seleccione la variante de visualización de descarga:" FontSize="15"/>
+                	<ComboBox x:Name="ProgressType" HorizontalAlignment="Right" Margin="0,44,10,0" VerticalAlignment="Top" Width="148" IsTabStop="False" Height="29" VerticalContentAlignment="Center">
                 		<ComboBoxItem Content="Mixta"/>
                 		<ComboBoxItem Content="General"/>
                 		<ComboBoxItem Content="Por archivo"/>
                 	</ComboBox>
-                	<Label  HorizontalAlignment="Left" Height="30" Margin="10,78,0,0" VerticalAlignment="Top" Width="301" Foreground="{Binding Foreground, ElementName=Window}" Content="Seleccione el valor de límite de descarga:" FontSize="14.667"/>
+                	<Label  HorizontalAlignment="Left" Height="30" Margin="10,78,170,0" VerticalAlignment="Top" Foreground="{Binding Foreground, ElementName=Window}" Content="Seleccione el valor de límite de descarga:" FontSize="14.667"/>
 
-                	<TextBox x:Name="SpeedValue" Height="30" Margin="311,78,92,0" VerticalAlignment="Top" Background="#19000000" BorderBrush="#B2171717" SelectionBrush="#FF5F5F5F" Foreground="#FFE2E2E2" FontSize="15" VerticalContentAlignment="Center" AllowDrop="True" IsTabStop="False" BorderThickness="0" PreviewTextInput="SpeedValue_PreviewTextInput" HorizontalContentAlignment="Right"/>
-                	<ComboBox x:Name="SpeedType" HorizontalAlignment="Left" Margin="393,78,0,0" VerticalAlignment="Top" Width="66" IsTabStop="False" Height="29" VerticalContentAlignment="Center">
+                	<TextBox x:Name="SpeedValue" Height="30" Margin="0,78,92,0" HorizontalAlignment="Right" Width="60" VerticalAlignment="Top" Background="#19000000" BorderBrush="#B2171717" SelectionBrush="#FF5F5F5F" Foreground="#FFE2E2E2" FontSize="15" VerticalContentAlignment="Center" AllowDrop="True" IsTabStop="False" BorderThickness="0" PreviewTextInput="SpeedValue_PreviewTextInput" HorizontalContentAlignment="Right"/>
+                	<ComboBox x:Name="SpeedType" HorizontalAlignment="Right" Margin="0,78,10,0" VerticalAlignment="Top" Width="72" IsTabStop="False" Height="29" VerticalContentAlignment="Center">
                 		<ComboBoxItem Content="KB/s"/>
                 		<ComboBoxItem Content="MB/s"/>
                 		<ComboBoxItem Content="GB/s"/>
                 	</ComboBox>
-                	<Label Content="0 - sin límite" HorizontalAlignment="Left" Height="24" Margin="10,113,0,0" VerticalAlignment="Top" Width="449" Foreground="#FF838383"/>
+                	<Label Content="0 - sin límite" HorizontalAlignment="Stretch" Height="24" Margin="10,113,10,0" VerticalAlignment="Top" Foreground="#FF838383"/>
 
                 </Grid>
             </StackPanel>
